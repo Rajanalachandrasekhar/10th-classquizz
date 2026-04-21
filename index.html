@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Smart Study Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HOME BUTTON -->
+  <div class="top-left" style="margin-left: -50;">
+    <button onclick="goHome()">🏠 Home</button>
+  </div>
+
+  <!-- TOP RIGHT BUTTONS (DESKTOP) -->
+  <div class="top-right">
+    <button onclick="openDashboard('quiz')">Quiz</button>
+    <button onclick="openDashboard('formulas')">Formulas</button>
+    <button onclick="openDashboard('timetable')">Timetable</button>
+  </div>
+
+  <!-- HAMBURGER MENU -->
+  <div class="menu-container">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div id="menu" class="menu">
+      <button onclick="openDashboard('quiz')">Quiz</button>
+      <button onclick="openDashboard('formulas')">Formulas</button>
+      <button onclick="openDashboard('timetable')">Timetable</button>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div id="topBar"></div>
+
+  <!-- TITLE -->
+  <h1 id="welcome">🎓 Welcome 10th Class Students</h1>
+
+  <!-- MAIN DASHBOARD -->
+  <div id="dashboard"></div>
+
+  <!-- QUIZ AREA -->
+  <div id="quizArea" class="container"></div>
+
+  <!-- TIMETABLE AREA -->
+  <div id="timetableArea" class="container" style="display:none;"></div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
