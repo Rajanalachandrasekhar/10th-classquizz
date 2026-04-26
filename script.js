@@ -7542,19 +7542,33 @@ function updateTopBar() {
       : currentSubject;
 }
 
+
+function getRandomQuestions(arr, count) {
+  let shuffled = [...arr]; // copy
+
+  // Fisher–Yates shuffle
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled.slice(0, Math.min(count, shuffled.length));
+}
+
 /***********************
  START QUIZ
 ***********************/
 function startQuiz(subject, lesson) {
   const data = quizData?.[subject]?.[lesson];
 
-
   if (!data) {
     alert("No quiz data found!");
     return;
   }
 
-  questions = data.slice(0, 10);
+  // ✅ RANDOM QUESTIONS (10)
+  questions = getRandomQuestions(data, 10);
+
   index = 0;
   score = 0;
 
@@ -7564,6 +7578,7 @@ function startQuiz(subject, lesson) {
   showQuestion();
 }
 
+
 /***********************
  SHOW QUESTION
 ***********************/
@@ -7572,12 +7587,13 @@ function showQuestion() {
   safe(box);
 
   const q = questions[index];
-
   if (!q) return;
 
-  let html = `<h2>${index + 1}. ${q.question}</h2>`;
+  box.innerHTML = "";
 
-  box.innerHTML = html;
+  const title = document.createElement("h2");
+  title.innerText = `${index + 1}. ${q.question}`;
+  box.appendChild(title);
 
   Object.entries(q.options).forEach(([key, val]) => {
     const btn = document.createElement("button");
@@ -7593,6 +7609,7 @@ function showQuestion() {
   fb.className = "feedback";
   box.appendChild(fb);
 }
+
 
 /***********************
  CHECK ANSWER
